@@ -1,8 +1,8 @@
 import java.util.Scanner;
-public class Rot13 {
+public class HolaMon {
     
     public static final String lletres = "abcdefghijklmnopqrstuvxyz";
-    public static final String lletresMaj = "ABCDEFGHIJKLMOPQRSTUVXYZ";
+    public static final String lletresMaj = "ABCDEFGHIJKLMNOPQRSTUVXYZ";
 
     public static String xifraRot13 (String cadena){
         String frase = "";
@@ -11,14 +11,14 @@ public class Rot13 {
             if (Character.isLetter(cadenaMin.charAt(x))){
                 for (int i = 0 ; i < lletres.length() ; i++){
                     if (cadenaMin.charAt(x) ==  lletres.charAt(i)){
-                        if (i+13 <= lletres.length()){
-                            if (Character.isLowerCase(cadenaMin.charAt(x))){
+                        if (i+13 < lletres.length()){
+                            if (Character.isLowerCase(cadena.charAt(x))){
                                 frase= frase + lletres.charAt(i+13);
                             }else{
                                 frase= frase + lletresMaj.charAt(i+13);
                             }
                         }else{
-                            if (Character.isLowerCase(cadenaMin.charAt(x))){
+                            if (Character.isLowerCase(cadena.charAt(x))){
                                 frase = frase + lletres.charAt((i+13)-lletres.length());
                             }else{
                                 frase = frase + lletresMaj.charAt((i+13)-lletresMaj.length());
@@ -41,13 +41,13 @@ public class Rot13 {
                 for (int i = 0 ; i < lletres.length() ; i++){
                     if (cadenaMin.charAt(x) ==  lletres.charAt(i)){
                         if (i-13 >= 0){
-                            if (Character.isLowerCase(cadenaMin.charAt(x))){
+                            if (Character.isLowerCase(cadena.charAt(x))){
                                 frase= frase + lletres.charAt(i-13);
                             }else{
                                 frase= frase + lletresMaj.charAt(i-13);
                             }
                         }else{
-                            if (Character.isLowerCase(cadenaMin.charAt(x))){
+                            if (Character.isLowerCase(cadena.charAt(x))){
                                 frase= frase + lletres.charAt((i-13)+lletres.length());
                             }else{
                                 frase= frase + lletresMaj.charAt((i-13)+lletresMaj.length());
@@ -94,4 +94,4 @@ public class Rot13 {
             return true;
         }
     }
-}
+}  

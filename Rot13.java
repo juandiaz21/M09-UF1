@@ -76,6 +76,11 @@ public class Rot13 {
                 System.out.println("Torno a preguntar, vols XIFRAR(X) o DESXIFRAR(D)?");
                 resposta = sc.nextLine(); 
             }
+            if (resposta.equals("X")||resposta.equals("x")){
+                System.out.println("La paraula que m'has demanat xifrada per Rot13 queda: " + xifraRot13(paraula));
+            }else if (resposta.equals("D")||resposta.equals("d")){
+                System.out.println("La paraula que m'has demanat desxifrada per Rot13 queda: " + desxifraRot13(paraula)); 
+            }
         }else{
             if (resposta.equals("X")||resposta.equals("x")){
                 System.out.println("La paraula que m'has demanat xifrada per Rot13 queda: " + xifraRot13(paraula));

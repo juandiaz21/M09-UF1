@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class HolaMon {
+public class Rot13 {
     
     public static final String lletres = "abcdefghijklmnopqrstuvxyz";
     public static final String lletresMaj = "ABCDEFGHIJKLMNOPQRSTUVXYZ";

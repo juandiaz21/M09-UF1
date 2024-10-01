@@ -66,7 +66,7 @@ public class Rot13 {
     public static void main(String args[]){
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("Dime una palabrita: ");
+        System.out.print("Dime una palabra: ");
         String paraula = sc.nextLine();
 
         System.out.println("Vols XIFRAR(X) o DESXIFRAR(D)?");

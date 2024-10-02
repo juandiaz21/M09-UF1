@@ -6,7 +6,7 @@ public class RotX {
     public static final char[] lletresMaj = {'A', 'B', 'C', 'Ç', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N','Ñ', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
 
     public static void main(String args[]){
-        Scanner sc = new Scanner(System.in, "ISO-8859-1");
+        Scanner sc = new Scanner(System.in, "UTF-8");
         String[] cuenta;
         System.out.print("Dime una palabra: ");
         String paraula = sc.nextLine();

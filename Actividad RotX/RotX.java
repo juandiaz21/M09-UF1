@@ -2,8 +2,8 @@ import java.util.Scanner;
 
 public class RotX {
     
-    public static final char[] lletres = {'a', 'b', 'c', 'ç', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n','ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
-    public static final char[] lletresMaj = {'A', 'B', 'C', 'Ç', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N','Ñ', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+    public static final char[] lletres = {'a','à','á', 'b', 'c', 'ç', 'd', 'e','è','é', 'f', 'g', 'h', 'i','í','ï', 'j', 'k', 'l', 'm', 'n','ñ', 'o','ó','ò', 'p', 'q', 'r', 's', 't', 'u','ú','ü', 'v', 'w', 'x', 'y', 'z'};
+    public static final char[] lletresMaj = {'A','À','Á', 'B', 'C', 'Ç', 'D', 'E','È','É', 'F', 'G', 'H', 'I','Í','Ï', 'J', 'K', 'L', 'M', 'N','Ñ', 'O','Ó','Ò', 'P', 'Q', 'R', 'S', 'T', 'U','Ú','Ü', 'V', 'W', 'X', 'Y', 'Z'};
 
     public static void main(String args[]){
         Scanner sc = new Scanner(System.in, "UTF-8");

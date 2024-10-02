@@ -8,8 +8,8 @@ public class RotX {
     public static void main(String args[]){
         Scanner sc = new Scanner(System.in, "UTF-8");
         String[] cuenta;
-        System.out.print("Dime una palabra: ");
         String paraula = sc.nextLine();
+        System.out.println(paraula);
         System.out.println("Vols XIFRAR(X) , DESXIFRAR(D) o FORÇA BRUTA(F)?");
         String resposta = sc.nextLine();
         if (!comprova(resposta)){
@@ -91,6 +91,15 @@ public class RotX {
     }
 
     public static String[] forcaBrutaRotX(String cadena){
+        System.out.print("Digues el nombre pel desplaçament: ");
+        int nombre = Integer.parseInt(sc.nextLine());
+        if (!comprovaNombre(nombre)){
+            while (!comprovaNombre(nombre)){
+                System.out.print("El nombre ha de ser menor a " + lletres.length + ". Digues un altre nombre pel desplaçament: ");
+                nombre = Integer.parseInt(sc.nextLine());
+            }
+        }
+        xifraRotX(cadena)
         String[] desxifrades;
         desxifrades = new String[lletres.length];
         String frase = "";
@@ -122,6 +131,7 @@ public class RotX {
             desxifrades[k] = frase;
             frase = "";
         }
+        sc.close();
         return desxifrades;
     }
     

@@ -10,7 +10,6 @@ public class RotX {
         String[] cuenta;
         System.out.print("Dime una palabra: ");
         String paraula = sc.nextLine();
-        System.out.println(paraula);
         System.out.println("Vols XIFRAR(X) , DESXIFRAR(D) o FORÇA BRUTA(F)?");
         String resposta = sc.nextLine();
         if (!comprova(resposta)){

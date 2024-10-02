@@ -3,14 +3,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+
 public class MonoAlfabetic {
     public static final char[] lletres = {'a','à','á', 'b', 'c', 'ç', 'd', 'e','è','é', 'f', 'g', 'h', 'i','í','ï', 'j', 'k', 'l', 'm', 'n','ñ', 'o','ó','ò', 'p', 'q', 'r', 's', 't', 'u','ú','ü', 'v', 'w', 'x', 'y', 'z'};
-    public static final char[] alfabetPermutat = permutaAlfabet(lletres);
+    public static char[] alfabetPermutat = permutaAlfabet(lletres);
     public static void main(String args[]){
         Scanner sc = new Scanner(System.in, "UTF-8");
         System.out.print("Dime una palabra: ");
         String palabra = sc.nextLine();
-        System.out.println(alfabetPermutat);
         System.out.print("Que quieres hacer: CIFRARLA (C) O DESCIFRARLA (D)? ");
         String resposta = sc.nextLine();
         if (!comprovaResposta(resposta)){

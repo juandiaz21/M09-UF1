@@ -34,10 +34,10 @@ public class PoliAlfabetic {
         rand = new Random(clau);
     }
     
-    public static void permutaAlfabet(char[] lletresEntrada) {
-        char[] lletresPermutades = lletresEntrada.clone(); 
+    public static void permutaAlfabet() {
+        char[] lletresPermutades = lletres.clone(); 
         List<Character> cadenaLletres = new ArrayList<>();
-        for (char c : lletresEntrada){
+        for (char c : lletres){
             cadenaLletres.add(c);
         }
         Collections.shuffle(cadenaLletres,rand);
@@ -52,7 +52,7 @@ public class PoliAlfabetic {
         String xifrada = "";
         String cadenaMin = cadena.toLowerCase();
         for (int i = 0 ; i < cadena.length() ; i++){
-            permutaAlfabet(lletres);
+            permutaAlfabet();
             if (Character.isLetter(cadena.charAt(i))){
                 for (int n = 0 ; n < lletres.length ; n++){
                     if (cadenaMin.charAt(i) ==  lletres[n]){
@@ -73,7 +73,7 @@ public class PoliAlfabetic {
         String desxifrada = "";
         String cadenaMin = cadena.toLowerCase();     
         for (int i = 0 ; i < cadena.length() ; i++){
-            permutaAlfabet(lletres);
+            permutaAlfabet();
             if (Character.isLetter(cadena.charAt(i))){
                 for (int n = 0 ; n < alfabetPermutat.length ; n++){
                     if (cadenaMin.charAt(i) ==  alfabetPermutat[n]){

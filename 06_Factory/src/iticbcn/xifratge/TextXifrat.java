@@ -1,19 +1,18 @@
 package iticbcn.xifratge;
 
-import java.util.Arrays;
-
 public class TextXifrat {
+    private byte[] data;
+
+    public TextXifrat(byte[] data) {
+        this.data = data;
+    }
+
+    public byte[] getBytes() {
+        return data;
+    }
+
     @Override
     public String toString() {
-        return "TextXifrat [bytes=" + Arrays.toString(bytes) + "]";
-    }
-
-    byte[] bytes;
-    public byte[] getBytes(){
-        return bytes;
-    }
-    
-    public TextXifrat(byte[] bytes){
-        this.bytes = bytes;
+        return new String(data);
     }
 }

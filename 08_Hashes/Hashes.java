@@ -41,12 +41,64 @@ public class Hashes {
             return null;
         }
     }
+    
     public String forcaBruta(String alg, String hash, String salt) throws NoSuchAlgorithmException, InvalidKeySpecException{
+
         char[] charset = "abcdefABCDEF1234567890!".toCharArray();
         npass = 0;
-        /* codigo a implementar */
-        return "";
+
+        for (int len = 1; len <= 6; len++) {
+
+            char[] attempt = new char[len];
+
+            for (int i = 0; i < charset.length; i++) {
+                attempt[0] = charset[i];
+                if (len == 1 && checkPassword(attempt, alg, hash, salt)) return new String(attempt);
+
+                for (int j = 0; j < charset.length; j++) {
+                    if (len > 1) attempt[1] = charset[j];
+                    if (len == 2 && checkPassword(attempt, alg, hash, salt)) return new String(attempt);
+
+                    for (int k = 0; k < charset.length; k++) {
+                        if (len > 2) attempt[2] = charset[k];
+                        if (len == 3 && checkPassword(attempt, alg, hash, salt)) return new String(attempt);
+
+                        for (int l = 0; l < charset.length; l++) {
+                            if (len > 3) attempt[3] = charset[l];
+                            if (len == 4 && checkPassword(attempt, alg, hash, salt)) return new String(attempt);
+
+                            for (int m = 0; m < charset.length; m++) {
+                                if (len > 4) attempt[4] = charset[m];
+                                if (len == 5 && checkPassword(attempt, alg, hash, salt)) return new String(attempt);
+
+                                for (int n = 0; n < charset.length; n++) {
+                                    if (len > 5) attempt[5] = charset[n];
+                                    if (len == 6 && checkPassword(attempt, alg, hash, salt)) return new String(attempt);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return null; 
     }
+
+    private boolean checkPassword(char[] attempt, String alg, String hash, String salt) throws NoSuchAlgorithmException, InvalidKeySpecException{
+        npass++;
+        String generatedHash;
+        String passwordAttempt = new String(attempt);
+        
+        if ("SHA-512".equals(alg)) {
+            generatedHash = getSHA512AmbSalt(passwordAttempt, salt);
+        } else if ("PBKDF2".equals(alg)) {
+            generatedHash = getPBKDF2AmbSalt(passwordAttempt, salt);
+        } else {
+            return false;
+        }
+        return hash.equals(generatedHash);
+    }
+
 
     public String getInterval(long t1, long t2){
         long diferencia = t2-t1;

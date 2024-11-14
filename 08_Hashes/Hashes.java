@@ -26,11 +26,11 @@ public class Hashes {
     public String getPBKDF2AmbSalt(String pw, String salt)  throws NoSuchAlgorithmException, InvalidKeySpecException{
         try {
             int iteracions = 10000;
-            int clauLength = 128; 
+            int claulength = 128; 
             char[] pwChar = pw.toCharArray();
             byte[] saltBytes = salt.getBytes();
 
-            PBEKeySpec spec = new PBEKeySpec(pwChar, saltBytes, iteracions, clauLength);
+            PBEKeySpec spec = new PBEKeySpec(pwChar, saltBytes, iteracions, claulength);
             SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHa512");
             byte[] hashedBytes = keyFactory.generateSecret(spec).getEncoded();
 
@@ -47,33 +47,32 @@ public class Hashes {
         char[] charset = "abcdefABCDEF1234567890!".toCharArray();
         npass = 0;
 
-        for (int len = 1; len <= 6; len++) {
+        for (int pos = 1; pos <= 6; pos++) {
 
-            char[] attempt = new char[len];
+            char[] prova = new char[pos];
 
             for (int i = 0; i < charset.length; i++) {
-                attempt[0] = charset[i];
-                if (len == 1 && checkPassword(attempt, alg, hash, salt)) return new String(attempt);
-
+                prova[0] = charset[i];
+                if (pos == 1 && comparaPw(prova, alg, hash, salt)) return new String(prova);
                 for (int j = 0; j < charset.length; j++) {
-                    if (len > 1) attempt[1] = charset[j];
-                    if (len == 2 && checkPassword(attempt, alg, hash, salt)) return new String(attempt);
+                    if (pos > 1) prova[1] = charset[j];
+                    if (pos == 2 && comparaPw(prova, alg, hash, salt)) return new String(prova);
 
                     for (int k = 0; k < charset.length; k++) {
-                        if (len > 2) attempt[2] = charset[k];
-                        if (len == 3 && checkPassword(attempt, alg, hash, salt)) return new String(attempt);
+                        if (pos > 2) prova[2] = charset[k];
+                        if (pos == 3 && comparaPw(prova, alg, hash, salt)) return new String(prova);
 
                         for (int l = 0; l < charset.length; l++) {
-                            if (len > 3) attempt[3] = charset[l];
-                            if (len == 4 && checkPassword(attempt, alg, hash, salt)) return new String(attempt);
+                            if (pos > 3) prova[3] = charset[l];
+                            if (pos == 4 && comparaPw(prova, alg, hash, salt)) return new String(prova);
 
                             for (int m = 0; m < charset.length; m++) {
-                                if (len > 4) attempt[4] = charset[m];
-                                if (len == 5 && checkPassword(attempt, alg, hash, salt)) return new String(attempt);
+                                if (pos > 4) prova[4] = charset[m];
+                                if (pos == 5 && comparaPw(prova, alg, hash, salt)) return new String(prova);
 
                                 for (int n = 0; n < charset.length; n++) {
-                                    if (len > 5) attempt[5] = charset[n];
-                                    if (len == 6 && checkPassword(attempt, alg, hash, salt)) return new String(attempt);
+                                    if (pos > 5) prova[5] = charset[n];
+                                    if (pos == 6 && comparaPw(prova, alg, hash, salt)) return new String(prova);
                                 }
                             }
                         }
@@ -84,19 +83,19 @@ public class Hashes {
         return null; 
     }
 
-    private boolean checkPassword(char[] attempt, String alg, String hash, String salt) throws NoSuchAlgorithmException, InvalidKeySpecException{
+    private boolean comparaPw(char[] prova, String alg, String hash, String salt) throws NoSuchAlgorithmException, InvalidKeySpecException{
         npass++;
-        String generatedHash;
-        String passwordAttempt = new String(attempt);
+        String hashComparar;
+        String intentPw = new String(prova);
         
-        if ("SHA-512".equals(alg)) {
-            generatedHash = getSHA512AmbSalt(passwordAttempt, salt);
-        } else if ("PBKDF2".equals(alg)) {
-            generatedHash = getPBKDF2AmbSalt(passwordAttempt, salt);
+        if (alg.equals("SHA-512")) {
+            hashComparar = getSHA512AmbSalt(intentPw, salt);
+        } else if (alg.equals("PBKDF2")) {
+            hashComparar = getPBKDF2AmbSalt(intentPw, salt);
         } else {
             return false;
         }
-        return hash.equals(generatedHash);
+        return hash.equals(hashComparar);
     }
 
 

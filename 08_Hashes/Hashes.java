@@ -65,7 +65,7 @@ public class Hashes {
                                 else{
                                     generatedHash = getPBKDF2AmbSalt(prova, salt);
                                 }    
-                                if (generatedHash.equals(hash)) { //comparem els hashes
+                                if (generatedHash != null && generatedHash.equals(hash)) { //comparem els hashes
                                     return prova; //tornem el pw desxifrat
                                 }
                             }

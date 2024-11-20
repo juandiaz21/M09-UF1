@@ -5,7 +5,6 @@ import java.util.HexFormat;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
-
 public class Hashes {
 
     private int npass;
@@ -43,36 +42,29 @@ public class Hashes {
     }
     
     public String forcaBruta(String alg, String hash, String salt) throws NoSuchAlgorithmException, InvalidKeySpecException{
-
-        char[] charset = "abcdefABCDEF1234567890!".toCharArray();
-        npass = 0;
-
-        for (int pos = 1; pos <= 6; pos++) {
-
-            char[] prova = new char[pos];
-
-            for (int i = 0; i < charset.length; i++) {
-                prova[0] = charset[i];
-                if (pos == 1 && comparaPw(prova, alg, hash, salt)) return new String(prova);
-                for (int j = 0; j < charset.length; j++) {
-                    if (pos > 1) prova[1] = charset[j];
-                    if (pos == 2 && comparaPw(prova, alg, hash, salt)) return new String(prova);
-
-                    for (int k = 0; k < charset.length; k++) {
-                        if (pos > 2) prova[2] = charset[k];
-                        if (pos == 3 && comparaPw(prova, alg, hash, salt)) return new String(prova);
-
-                        for (int l = 0; l < charset.length; l++) {
-                            if (pos > 3) prova[3] = charset[l];
-                            if (pos == 4 && comparaPw(prova, alg, hash, salt)) return new String(prova);
-
-                            for (int m = 0; m < charset.length; m++) {
-                                if (pos > 4) prova[4] = charset[m];
-                                if (pos == 5 && comparaPw(prova, alg, hash, salt)) return new String(prova);
-
-                                for (int n = 0; n < charset.length; n++) {
-                                    if (pos > 5) prova[5] = charset[n];
-                                    if (pos == 6 && comparaPw(prova, alg, hash, salt)) return new String(prova);
+        String charset = "abcdefABCDEF1234567890!"; 
+        char[] password = new char[6];  
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < charset.length(); i++) {
+            password[0] = charset.charAt(i); 
+            for (int j = 0; j < charset.length(); j++) {
+                password[1] = charset.charAt(j); 
+                for (int k = 0; k < charset.length(); k++) {
+                    password[2] = charset.charAt(k); 
+                    for (int l = 0; l < charset.length(); l++) {
+                        password[3] = charset.charAt(l); 
+                        for (int m = 0; m < charset.length(); m++) {
+                            password[4] = charset.charAt(m); 
+                            for (int n = 0; n < charset.length(); n++) {
+                                password[5] = charset.charAt(n); 
+                                String attempt = new String(password);  
+                                npass++; 
+                                
+                                String generatedHash = (alg.equals("SHA-512")) ? 
+                                        getSHA512AmbSalt(attempt, salt) : getPBKDF2AmbSalt(attempt, salt); 
+                                        
+                                if (generatedHash != null && generatedHash.equals(hash)) {
+                                    return attempt; 
                                 }
                             }
                         }
@@ -80,24 +72,9 @@ public class Hashes {
                 }
             }
         }
+        
         return null; 
     }
-
-    private boolean comparaPw(char[] prova, String alg, String hash, String salt) throws NoSuchAlgorithmException, InvalidKeySpecException{
-        npass++;
-        String hashComparar;
-        String intentPw = new String(prova);
-        
-        if (alg.equals("SHA-512")) {
-            hashComparar = getSHA512AmbSalt(intentPw, salt);
-        } else if (alg.equals("PBKDF2")) {
-            hashComparar = getPBKDF2AmbSalt(intentPw, salt);
-        } else {
-            return false;
-        }
-        return hash.equals(hashComparar);
-    }
-
 
     public String getInterval(long t1, long t2){
         long diferencia = t2-t1;

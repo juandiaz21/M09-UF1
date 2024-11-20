@@ -7,9 +7,9 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 public class Hashes {
 
-    private int npass;
+    private int npass; //nombre d'intents
 
-    public String getSHA512AmbSalt(String pw, String salt) throws NoSuchAlgorithmException{
+    public String getSHA512AmbSalt(String pw, String salt) throws NoSuchAlgorithmException{ //metode fer hash amb SHA-512
         try{
             MessageDigest md = MessageDigest.getInstance("SHA-512");
             md.update(salt.getBytes());
@@ -22,7 +22,7 @@ public class Hashes {
             return null;
         }
     }
-    public String getPBKDF2AmbSalt(String pw, String salt)  throws NoSuchAlgorithmException, InvalidKeySpecException{
+    public String getPBKDF2AmbSalt(String pw, String salt)  throws NoSuchAlgorithmException, InvalidKeySpecException{ //metode fer hash amb PBKDF2
         try {
             int iteracions = 10000;
             int claulength = 128; 
@@ -42,9 +42,9 @@ public class Hashes {
     }
     
     public String forcaBruta(String alg, String hash, String salt) throws NoSuchAlgorithmException, InvalidKeySpecException{
-        String charset = "abcdefABCDEF1234567890!"; 
-        char[] pw = new char[6]; 
-        for (int i = 0; i < charset.length(); i++) {
+        String charset = "abcdefABCDEF1234567890!"; //els chars que provarem
+        char[] pw = new char[6];  //l'array amb el que crearem els strings a comparar
+        for (int i = 0; i < charset.length(); i++) { //bucles que faran que es provi cada char 
             pw[0] = charset.charAt(i); 
             for (int j = 0; j < charset.length(); j++) {
                 pw[1] = charset.charAt(j); 
@@ -56,17 +56,17 @@ public class Hashes {
                             pw[4] = charset.charAt(m); 
                             for (int n = 0; n < charset.length(); n++) {
                                 pw[5] = charset.charAt(n); 
-                                String prova = new String(pw);  
-                                npass++; 
-                                String generatedHash;
-                                if (alg.equals("SHA-512")){
-                                    generatedHash = getSHA512AmbSalt(prova, salt);
+                                String prova = new String(pw); //creem el string que provarem 
+                                npass++; //nou intent
+                                String generatedHash; 
+                                if (alg.equals("SHA-512")){ //mirem quin alg estem utiliztan
+                                    generatedHash = getSHA512AmbSalt(prova, salt); //fem el hash amb el string i salt 
                                 }
                                 else{
                                     generatedHash = getPBKDF2AmbSalt(prova, salt);
                                 }    
-                                if (generatedHash != null && generatedHash.equals(hash)) {
-                                    return prova; 
+                                if (generatedHash.equals(hash)) { //comparem els hashes
+                                    return prova; //tornem el pw desxifrat
                                 }
                             }
                         }
@@ -78,12 +78,12 @@ public class Hashes {
         return null; 
     }
 
-    public String getInterval(long t1, long t2){
-        long diferencia = t2-t1;
+    public String getInterval(long t1, long t2){ 
+        long diferencia = t2-t1; //calcul del temps trigat
         return diferencia + "ms";
 
     }
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception{ //main de l'activitat
         String salt = "qpoweiruañslkdfjz";
         String pw = "aaabF!";
         Hashes h = new Hashes();

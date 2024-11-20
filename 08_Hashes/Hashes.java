@@ -43,28 +43,27 @@ public class Hashes {
     
     public String forcaBruta(String alg, String hash, String salt) throws NoSuchAlgorithmException, InvalidKeySpecException{
         String charset = "abcdefABCDEF1234567890!"; 
-        char[] password = new char[6];  
+        char[] pw = new char[6];  
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < charset.length(); i++) {
-            password[0] = charset.charAt(i); 
+            pw[0] = charset.charAt(i); 
             for (int j = 0; j < charset.length(); j++) {
-                password[1] = charset.charAt(j); 
+                pw[1] = charset.charAt(j); 
                 for (int k = 0; k < charset.length(); k++) {
-                    password[2] = charset.charAt(k); 
+                    pw[2] = charset.charAt(k); 
                     for (int l = 0; l < charset.length(); l++) {
-                        password[3] = charset.charAt(l); 
+                        pw[3] = charset.charAt(l); 
                         for (int m = 0; m < charset.length(); m++) {
-                            password[4] = charset.charAt(m); 
+                            pw[4] = charset.charAt(m); 
                             for (int n = 0; n < charset.length(); n++) {
-                                password[5] = charset.charAt(n); 
-                                String attempt = new String(password);  
+                                pw[5] = charset.charAt(n); 
+                                String prova = new String(pw);  
                                 npass++; 
                                 
-                                String generatedHash = (alg.equals("SHA-512")) ? 
-                                        getSHA512AmbSalt(attempt, salt) : getPBKDF2AmbSalt(attempt, salt); 
+                                String generatedHash = (alg.equals("SHA-512")) ? getSHA512AmbSalt(prova, salt) : getPBKDF2AmbSalt(prova, salt); 
                                         
                                 if (generatedHash != null && generatedHash.equals(hash)) {
-                                    return attempt; 
+                                    return prova; 
                                 }
                             }
                         }

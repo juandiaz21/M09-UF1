@@ -58,9 +58,13 @@ public class Hashes {
                                 pw[5] = charset.charAt(n); 
                                 String prova = new String(pw);  
                                 npass++; 
-                                
-                                String generatedHash = (alg.equals("SHA-512")) ? getSHA512AmbSalt(prova, salt) : getPBKDF2AmbSalt(prova, salt); 
-                                        
+                                String generatedHash;
+                                if (alg.equals("SHA-512")){
+                                    generatedHash = getSHA512AmbSalt(prova, salt);
+                                }
+                                else{
+                                    generatedHash = getPBKDF2AmbSalt(prova, salt);
+                                }    
                                 if (generatedHash != null && generatedHash.equals(hash)) {
                                     return prova; 
                                 }

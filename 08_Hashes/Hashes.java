@@ -24,7 +24,7 @@ public class Hashes {
     }
     public String getPBKDF2AmbSalt(String pw, String salt)  throws NoSuchAlgorithmException, InvalidKeySpecException{ //metode fer hash amb PBKDF2
         try {
-            int iteracions = 10000;
+            int iteracions = 65536;
             int claulength = 128; 
             char[] pwChar = pw.toCharArray();
             byte[] saltBytes = salt.getBytes();
